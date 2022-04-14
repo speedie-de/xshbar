@@ -1,0 +1,5 @@
+# xshbar config file
+XSHBAR_BIN_DIR=/usr/bin # Where your binaries are located. Probably no reason to change if you're not using NixOS or something.
+UPDATEFREQ=1 # How quickly xshbar will update what's printed on the screen.
+XSHBAR_VAR_DOTDIR=~/.config/xshbar # Where your dotfiles are located.
+PLUGDIR=$XSHBAR_VAR_DOTDIR/plugins.use # Directory where your plugins are located.

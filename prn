@@ -1,0 +1,3 @@
+XSHBAR_CORE_DISPLAY="  $ramstatus_usedram |   $date_time |   $date_date |  $alsa_vol |   $WEATHER_CURRENT_FORECAST |   $NETSTAT_TX $DFMPEG_STATUS |  $TEMP_CPU $mocp_file_title" # The contents of this line will be printed.
+# You may use variables AND commands but ONLY if it's inside a variable $(echo "Like this.")
+# You can also use any variables set by plugins.

@@ -1,0 +1,59 @@
+#!/bin/dash
+# xshbar
+# customizable xsetroot bar for window managers
+# written by speedie, licensed under MIT.
+###################################################>
+XSHBAR_INIT()
+{
+  echo "xshbar has started." && XSHBAR_VAR_HASSTARTED=true
+}
+
+XSHBAR_SOURCE()
+{
+  . ~/.config/xshbar/config || . $XSHBAR_VAR_DOTDIR/config # Import config
+  XSHBAR_IMPORT || . $PLUGDIR/* # Import plugins
+  . ~/.config/xshbar/prn || . $XSHBAR_VAR_DOTDIR/prn # Import print buffer
+}
+
+XSHBAR_IMPORT()
+{
+  . $PLUGDIR/date.plugin
+  . $PLUGDIR/ramstatus.plugin
+  . $PLUGDIR/mocp.plugin
+  . $PLUGDIR/alsa.plugin
+  . $PLUGDIR/weather.plugin
+  . $PLUGDIR/netstat.plugin
+}
+
+XSHBAR_DIE()
+{
+  XSH_VAR_HASSTARTED=false && exit 1 # Failed exit.
+}
+
+XSHBAR_END()
+{
+  XSH_VAR_HASSTARTED=false && exit 0 # Successful exit
+}
+
+XSHBAR_CHECK_DEP()
+{
+  ls $XSHBAR_BIN_DIR/xsetroot > /dev/null || XSHBAR_DIE
+}
+
+# Check to make sure every dependency is installed.
+XSHBAR_INIT || XSHBAR_DIE
+XSHBAR_SOURCE || XSHBAR_DIE
+XSHBAR_CHECK_DEP || XSHBAR_DIE
+
+XSHBAR_SET_ROOT()
+{
+  XSHBAR_IMPORT
+  . ~/.config/xshbar/prn
+  XSHBAR_CORE_PRINT=$(echo $XSHBAR_CORE_DISPLAY)
+  xsetroot -name "$XSHBAR_CORE_PRINT" || XSHBAR_DIE
+  sleep $UPDATEFREQ || XSHBAR_DIE
+  XSHBAR_SET_ROOT || XSHBAR_DIE
+}
+
+XSHBAR_SET_ROOT
+XSHBAR_END
