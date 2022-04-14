@@ -1,0 +1,12 @@
+TYPE=xshbar_plugin
+NAME="ramstatus"
+AUTHOR="speedie"
+VERSION="0.1"
+
+ramgrep()
+{
+  ramstatus_totalram="$(< /proc/meminfo grep -i 'memtotal' | grep -o '[[:digit:]]*' | awk '{$1=$1/1024000; print $1"GB";}' | awk 'NR!-2')"
+  ramstatus_usedram="$(echo $(free -h --giga | awk '/^Mem/ {print $3}')B)"
+}
+
+ramgrep

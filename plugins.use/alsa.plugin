@@ -1,0 +1,11 @@
+TYPE=xshbar_plugin
+NAME="alsa"
+AUTHOR="speedie"
+VERSION="0.1-08-04-2022-r1"
+
+alsaquery()
+{
+  alsa_vol=$(echo $(amixer -c 0 get Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/")%)
+}
+
+alsaquery

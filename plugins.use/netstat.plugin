@@ -1,0 +1,15 @@
+TYPE=xshbar_plugin
+NAME="netstat"
+AUTHOR="speedie"
+VERSION="0.2"
+
+NETSTAT_DEVICE="enp4s0"
+
+netstat()
+{
+  NETSTAT_RX=$(</sys/class/net/$NETSTAT_DEVICE/statistics/rx_bytes awk '{$1=$1/1024000; print $1"B";}' | sed 's/.*\(....\)/\1/')
+  NETSTAT_TX=$(</sys/class/net/$NETSTAT_DEVICE/statistics/tx_bytes awk '{$1=$1/1024000; print $1"B";}' | sed 's/.*\(....\)/\1/')
+  # NETSTAT_DEVICE
+}
+
+netstat

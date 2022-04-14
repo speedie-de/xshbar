@@ -1,0 +1,16 @@
+TYPE=xshbar_plugin
+NAME="temp"
+AUTHOR="speedie"
+VERSION="0.1"
+NOTES="Requires lm-sensors"
+
+TEMP="temp1" # Most likely no need to change this.
+
+TEMPGREP()
+{
+  TEMP_CPU=$(sensors | grep "$TEMP" | sed 's/(.*//' | sed "s/$TEMP.//" | sed -r 's/\s+//g')
+}
+
+TEMPGREP
+
+echo $TEMP_CPU

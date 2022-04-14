@@ -1,0 +1,16 @@
+TYPE=xshbar_plugin
+NAME="dfmpeg"
+AUTHOR="speedie"
+VERSION="0.1"
+NOTES="This requires a version of dfmpeg released 10/04/2022 or later. If you haven't, update dfmpeg."
+
+DFMPEG_TITLE_RECORDING="|   Recording"
+DFMPEG_TITLE_STOPPED=""
+
+DFMPEG_GREPSTATUS()
+{
+  ls /tmp/dfmpeg-recording && DFMPEG_STATUS="$DFMPEG_TITLE_RECORDING"
+  ls /tmp/dfmpeg-recording || DFMPEG_STATUS="$DFMPEG_TITLE_STOPPED"
+}
+
+DFMPEG_GREPSTATUS

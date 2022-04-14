@@ -1,0 +1,35 @@
+TYPE=xshbar_plugin
+NAME="mocp"
+AUTHOR="speedie"
+VERSION="0.3-09-04-2022-r1"
+
+# Set variables
+folder="/mnt/storage01/Music/Playlist/" # Your music folder.
+format=".mp3" # The format of your music.
+uncut=$(mocp -Q %file) # Leave as default.
+title="|  " # Anything in here will be added before the variable.
+empty=""
+
+# Hide $title if $uncut is empty
+case "$(echo $uncut)" in
+    "") restoretitle=$title && title="" ;;
+esac
+
+mocpquery()
+{
+  mocp_full_filename="$title $uncut"
+  mocp_file_title=$(echo $title $uncut | sed -e "s|$folder|${empty}|g" | sed -e "s|$format|$empty|g")
+  mocp_currentfile="$title $uncut"
+  mocp_title="$title $(mocp -Q %title)"
+  mocp_album="$title $(mocp -Q %album)"
+  mocp_state="$title $(mocp -Q %state)"
+  mocp_totaltime="$title $(mocp -Q %tt)"
+  mocp_timeleft="$title $(mocp -Q %tl)"
+  mocp_artist="$title $(mocp -Q %artist)"
+  mocp_rate="$title $(mocp -Q %r)"
+  mocp_bitrate="$title $(mocp -Q %b)"
+  mocp_currenttime="$title $(mocp -Q %ct)"
+  mocp_currentsec="$title $(mocp -Q %cs)"
+}
+
+mocpquery

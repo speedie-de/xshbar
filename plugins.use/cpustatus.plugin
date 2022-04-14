@@ -1,0 +1,14 @@
+TYPE=xshbar_plugin
+NAME="cpustatus"
+AUTHOR="speedie"
+VERSION="0.1"
+
+cpugrep()
+{
+  cpu_name=$(lscpu | sed -nr '/Model name/ s/.*:\s*(.*) @ .*/\1/p')
+  cpu_usage=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}')
+  cpu_threads=$(nproc)
+  cpu_name_2=$(uname -p)
+}
+
+cpugrep

@@ -1,0 +1,15 @@
+TYPE=xshbar_plugin
+NAME="weather"
+AUTHOR="speedie"
+VERSION="0.1"
+
+WEATHER_SETVAR()
+{
+  WEATHER_FORMAT=3 # Probably no need to change
+  WEATHER_LOCATION=Stockholm # Only change if you want a different location
+  WEATHER_URL="wttr.in/$WEATHER_LOCATION?format=$WEATHER_FORMAT" # The URL to get forecasts from
+  WEATHER_FORECAST_RESULT=$(curl $WEATHER_URL | sed 's/.* //' | sed 's/.*\(.....\)/\1/') # The result. This is the variable you wanna use I think.
+  WEATHER_CURRENT_FORECAST=$(echo $WEATHER_LOCATION: $WEATHER_FORECAST_RESULT)
+}
+
+WEATHER_SETVAR
