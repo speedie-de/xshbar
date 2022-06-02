@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 # xshbar
 # customizable xsetroot bar for window managers
 # written by speedie, licensed under MIT.
